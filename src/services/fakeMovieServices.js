@@ -8,6 +8,7 @@ const movies = [
     numberInStock: 6,
     dailyRentalRate: 2.5,
     publishDate: "Sun Mar 20 2022 12:31:13 GMT+0530",
+    liked: true,
   },
   {
     _id: "5b21ca002",
