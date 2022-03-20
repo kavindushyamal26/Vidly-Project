@@ -1,9 +1,10 @@
 import "./App.css";
+import Movies from "./components/movie";
 
 function App() {
   return (
     <div className="container">
-      <h1>Vidly Project</h1>
+      <Movies />
     </div>
   );
 }
