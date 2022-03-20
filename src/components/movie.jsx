@@ -5,10 +5,19 @@ class Movies extends Component {
   state = {
     movies: getMovies(),
   };
+
+  handleDelete = (movie) => {
+    const movies = this.state.movies.filter((m) => m._id !== movie._id);
+    this.setState({ movies });
+  };
+
   render() {
     return (
       <>
-        <h2 className="my-3">Movies</h2>
+        <h3 className="mt-3">Movies</h3>
+        <h6 style={{ color: "GrayText" }} className="mb-4">
+          Showing {this.state.movies.length} movies in the DB
+        </h6>
         <table className="table">
           <thead>
             <tr>
@@ -29,7 +38,7 @@ class Movies extends Component {
                   <button
                     type="button"
                     className="btn btn-danger"
-                    //   onClick={() => this.handleUpdate(p)}
+                    onClick={() => this.handleDelete(m)}
                   >
                     Delete
                   </button>
