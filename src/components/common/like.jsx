@@ -3,7 +3,6 @@ import React, { Component } from "react";
 class Like extends Component {
   state = {};
   render() {
-    console.log("Props", this.props);
     let classes = "fa fa-heart";
     if (!this.props.liked) classes += "-o";
     return (
