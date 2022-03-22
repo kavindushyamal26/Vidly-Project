@@ -15,7 +15,8 @@ class Movies extends Component {
   };
 
   componentDidMount() {
-    this.setState({ movies: getMovies(), genres: getGenres() });
+    const genres = [{ name: "All genres" }, ...getGenres()];
+    this.setState({ movies: getMovies(), genres });
   }
 
   handleDelete = (movie) => {
@@ -48,6 +49,7 @@ class Movies extends Component {
       genres,
       selectedGenre,
     } = this.state;
+
     if (count === 0)
       return (
         <h5 style={{ color: "GrayText" }} className="my-4">
@@ -55,15 +57,18 @@ class Movies extends Component {
         </h5>
       );
 
-    const filtered = selectedGenre
-      ? allmovies.filter((m) => m.genre._id === selectedGenre._id)
-      : allmovies;
+    const filtered =
+      selectedGenre && selectedGenre._id
+        ? allmovies.filter((m) => m.genre._id === selectedGenre._id)
+        : allmovies;
+
     const movies = paginate(filtered, currentPage, pageSize);
+
     return (
       <>
         <h3 className="mt-3">Movies</h3>
         <h6 style={{ color: "GrayText" }} className="mb-4">
-          Showing {allmovies.length} movies in the DB
+          Showing {filtered.length} movies in the DB
         </h6>
         <div className="row">
           <div className="col-2 m-3">
