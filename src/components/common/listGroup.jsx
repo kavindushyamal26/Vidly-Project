@@ -7,6 +7,7 @@ const ListGroup = (props) => {
         <li
           onClick={() => props.onItemSelect(li)}
           key={li._id}
+          style={{ cursor: "pointer" }}
           className={
             li === props.selectedItem
               ? "list-group-item active"
