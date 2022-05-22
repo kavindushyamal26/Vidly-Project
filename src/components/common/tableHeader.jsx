@@ -18,7 +18,7 @@ class TableHeader extends Component {
     const { sortColumn } = this.props;
     if (sortColumn.path !== column.path || !column.path) return null;
     if (sortColumn.order === "asc") return <i class="fa fa-sort-asc"></i>;
-    return <i class="fa fa-sort-desc"></i>;
+    return <i className="fa fa-sort-desc"></i>;
   };
 
   tableheaderStyle = (th) => {
