@@ -1,10 +1,22 @@
 import React, { Component } from "react";
 
 class LoginForm extends Component {
+  state = {
+    account: { username: "", password: "" },
+  };
+
   handleSubmit = (e) => {
     e.preventDefault();
   };
+
+  handleChange = (e) => {
+    const account = { ...this.state.account };
+    account[e.currentTarget.name] = e.currentTarget.value;
+    this.setState({ account });
+  };
+
   render() {
+    const { account } = this.state;
     return (
       <div>
         <h1>Login Form</h1>
@@ -13,7 +25,9 @@ class LoginForm extends Component {
             <label htmlFor="username">Username</label>
             <input
               autoFocus
-              type="email"
+              value={account.username}
+              onChange={this.handleChange}
+              name="username"
               className="form-control"
               id="username"
               aria-describedby="emailHelp"
@@ -23,7 +37,10 @@ class LoginForm extends Component {
           <div className="form-group my-2">
             <label htmlFor="password">Password</label>
             <input
+              value={account.password}
+              onChange={this.handleChange}
               type="password"
+              name="password"
               className="form-control"
               id="password"
               placeholder="Password"
