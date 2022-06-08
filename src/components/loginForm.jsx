@@ -1,13 +1,39 @@
 import React, { Component } from "react";
+import Joi from "joi-browser";
 import Input from "./common/input";
 
 class LoginForm extends Component {
   state = {
     account: { username: "", password: "" },
+    errors: {},
+  };
+
+  schema = {
+    username: Joi.string().required().label("Username"),
+    password: Joi.string().required().label("Password"),
+  };
+
+  validate = () => {
+    const result = Joi.validate(this.state.account, this.schema, {
+      abortEarly: false,
+    });
+    if (!result.error) return null;
+
+    const errors = {};
+    for (let item of result.error.details) {
+      errors[item.path[0]] = item.message;
+    }
+
+    return errors;
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
+
+    const errors = this.validate();
+    console.log(errors);
+    this.setState({ errors });
+    if (errors) return;
   };
 
   handleChange = (e) => {
@@ -17,7 +43,7 @@ class LoginForm extends Component {
   };
 
   render() {
-    const { account } = this.state;
+    const { account, errors } = this.state;
     return (
       <div>
         <h1>Login Form</h1>
@@ -28,7 +54,8 @@ class LoginForm extends Component {
             value={account.username}
             placeholder="Enter Username"
             onChange={this.handleChange}
-            autoFocus="true"
+            autoFocus
+            error={errors.username}
           />
           <Input
             name="password"
@@ -36,7 +63,7 @@ class LoginForm extends Component {
             value={account.password}
             placeholder="Enter Password"
             onChange={this.handleChange}
-            autoFocus="false"
+            error={errors.password}
           />
 
           <button type="submit" className="btn btn-primary my-3">
