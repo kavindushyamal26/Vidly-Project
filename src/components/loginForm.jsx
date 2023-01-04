@@ -27,6 +27,8 @@ class LoginForm extends Component {
     return errors;
   };
 
+  validateProperty = () => {};
+
   handleSubmit = (e) => {
     e.preventDefault();
 

@@ -6,7 +6,7 @@ const Pagination = (props) => {
   const pagesCount = Math.ceil(itemsCount / pageSize);
   if (pagesCount === 1) return null;
   const pages = _.range(1, pagesCount + 1); //Arrey
-  //console.log("cp", currentPage);
+  console.log("pages", pages);
 
   return (
     <nav aria-label="Page navigation example" className="mt-3">
